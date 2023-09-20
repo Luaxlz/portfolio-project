@@ -1,11 +1,9 @@
 type SectionTitleProps = {
-    title: string,
-    subtitle: string,
-    classname?: string,
-}
+  title: string;
+  subtitle: string;
+  classname?: string;
+};
 
 export const SectionTitle = () => {
-    return (
-
-    )
-}
+  return null;
+};
