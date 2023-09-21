@@ -7,5 +7,6 @@
     "camelcase": "off",
     "no-unused-vars": "off",
     "no-undef": "off"
+    "prettier/prettier": ["error", { "singleQuote": true }]
   }
 }
