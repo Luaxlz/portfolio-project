@@ -1,6 +1,6 @@
-import { SectionTitle } from "@/app/components/section-title";
-import { TechCard } from "./tech-card";
-import { TbBrandNextjs } from "react-icons/tb";
+import { SectionTitle } from '@/app/components/section-title';
+import { TechCard } from './tech-card';
+import { TbBrandNextjs } from 'react-icons/tb';
 
 export const KnowTechs = () => {
   return (
@@ -13,8 +13,8 @@ export const KnowTechs = () => {
             key={index}
             tech={{
               icon: <TbBrandNextjs />,
-              name: "Next.JS",
-              startDate: "2022-10-22",
+              name: 'Next.JS',
+              startDate: '2022-10-22'
             }}
           />
         ))}
