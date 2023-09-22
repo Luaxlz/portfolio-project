@@ -1,0 +1,24 @@
+import { SectionTitle } from "@/app/components/section-title";
+import { ExperienceCard } from "./experience-card";
+
+export const WorkExperience = () => {
+  return (
+    <section className="container py-16 flex flex-col md:flex-row gap-10 md:gap-4 lg:gap-16">
+      <div className="max-w-[420px]">
+        <SectionTitle
+          title="Experiência profissional"
+          subtitle="experiências"
+        />
+        <p className="text-gray-400 mt-6">
+          Estou sempre aberto a novos desafios e projetos emocionantes. Vamos
+          trabalhar juntos para criar soluções incríveis para a sua empresa!
+        </p>
+      </div>
+
+      <div className="flex flex-col gap-4">
+        <ExperienceCard />
+        <ExperienceCard />
+      </div>
+    </section>
+  );
+};
