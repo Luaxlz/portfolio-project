@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "@/app/components/button";
 import { TechBadge } from "@/app/components/tech-badge";
 import Image from "next/image";
@@ -29,6 +30,12 @@ const MOCK_CONTACTS = [
 ];
 
 export const HeroSection = () => {
+  const handleContact = () => {
+    const contactSection = document.querySelector("#contact");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <section
       className="
@@ -66,7 +73,7 @@ export const HeroSection = () => {
           </div>
 
           <div className="mt-6 lg:mt-10 flex sm:items-center sm:gap-5 flex-col sm:flex-row">
-            <Button className="w-max shadow-button">
+            <Button className="w-max shadow-button" onClick={handleContact}>
               Entre em contato
               <HiArrowNarrowRight size={18} />
             </Button>
