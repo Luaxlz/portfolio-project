@@ -1,35 +1,11 @@
 "use client";
 import { Button } from "@/app/components/button";
+import { CMSIcon } from "@/app/components/cms-icon";
 import { RichText } from "@/app/components/rich-text";
 import { TechBadge } from "@/app/components/tech-badge";
 import { HomePageInfo } from "@/app/types/page-info";
 import Image from "next/image";
 import { HiArrowNarrowRight } from "react-icons/hi";
-import {
-  TbBrandGithub,
-  TbBrandLinkedin,
-  TbBrandWhatsapp,
-  TbBrandYoutube,
-} from "react-icons/tb";
-
-const MOCK_CONTACTS = [
-  {
-    url: "http://github.com.br",
-    icon: <TbBrandGithub />,
-  },
-  {
-    url: "http://linkedin.com.br",
-    icon: <TbBrandLinkedin />,
-  },
-  {
-    url: "http://youtube.com.br",
-    icon: <TbBrandYoutube />,
-  },
-  {
-    url: "http://whatsapp.com.br",
-    icon: <TbBrandWhatsapp />,
-  },
-];
 
 type HeroSectionProps = {
   homeInfo: HomePageInfo;
@@ -69,8 +45,8 @@ export const HeroSection = ({ homeInfo }: HeroSectionProps) => {
           </div>
 
           <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px]">
-            {Array.from({ length: 7 }).map((_, index) => (
-              <TechBadge key={index} name="Next.JS" />
+            {homeInfo.technologies.map((tech) => (
+              <TechBadge name={tech.name} />
             ))}
           </div>
 
@@ -81,14 +57,13 @@ export const HeroSection = ({ homeInfo }: HeroSectionProps) => {
             </Button>
 
             <div className="text-gray-600 text-2xl flex items-center h-20 gap-3">
-              {MOCK_CONTACTS.map((contact, index) => (
+              {homeInfo.socials.map((social) => (
                 <a
-                  href={contact.url}
-                  key={`contact-${index}`}
+                  href={social.url}
                   target="_blank"
                   className="hover:text-gray-100 transition-colors"
                 >
-                  {contact.icon}
+                  <CMSIcon icon={social.iconSvg} />
                 </a>
               ))}
             </div>
@@ -98,7 +73,7 @@ export const HeroSection = ({ homeInfo }: HeroSectionProps) => {
         <Image
           width={420}
           height={404}
-          src="https://placehold.co/420x404/png"
+          src={homeInfo.profilePicture.url}
           alt="Foto de perfil do Lucas Angeli"
           className="w-[300px] h-[300px] lg:w-[420px] lg:h-[404px] mb-6 lg:mb-0 shadow-2xl rounded-lg object-cover"
         />
