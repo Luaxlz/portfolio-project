@@ -1,6 +1,8 @@
 "use client";
 import { Button } from "@/app/components/button";
+import { RichText } from "@/app/components/rich-text";
 import { TechBadge } from "@/app/components/tech-badge";
+import { HomePageInfo } from "@/app/types/page-info";
 import Image from "next/image";
 import { HiArrowNarrowRight } from "react-icons/hi";
 import {
@@ -29,7 +31,11 @@ const MOCK_CONTACTS = [
   },
 ];
 
-export const HeroSection = () => {
+type HeroSectionProps = {
+  homeInfo: HomePageInfo;
+};
+
+export const HeroSection = ({ homeInfo }: HeroSectionProps) => {
   const handleContact = () => {
     const contactSection = document.querySelector("#contact");
     if (contactSection) {
@@ -58,13 +64,9 @@ export const HeroSection = () => {
           <p className="font-mono text-emerald-400">Olá, meu nome é</p>
           <h2 className="text-4xl font-medium mt-2">Lucas Angeli</h2>
 
-          <p className="text-gray-400 my-6 text-sm sm:text-base">
-            Olá, meu nome é Lucas Angeli e sou um desenvolvedor fullstack
-            apaixonado por tecnologia. Com muita vontade e imaginação, meu
-            objetivo é criar sistemas e plataformas bonitas e funcionais, além
-            de participar em projetos desafiadores. Estou sempre aberto a novas
-            oportunidades e desafios.
-          </p>
+          <div className="text-gray-400 my-6 text-sm sm:text-base">
+            <RichText content={homeInfo.introduction.raw} />
+          </div>
 
           <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px]">
             {Array.from({ length: 7 }).map((_, index) => (
