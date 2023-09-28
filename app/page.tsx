@@ -31,7 +31,10 @@ const getPageData = async (): Promise<HomePageData> => {
     }
   `;
 
-  return fetchHygraphQuery(query);
+  return fetchHygraphQuery(
+    query,
+    60 * 60 * 24 //24 hours
+  );
 };
 
 export default async function Home() {
