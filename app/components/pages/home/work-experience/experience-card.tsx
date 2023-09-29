@@ -69,7 +69,7 @@ export const ExperienceCard = ({ experience }: ExperienceCardProps) => {
           </a>
           <h4 className="text-gray-300">{role}</h4>
           <span className="text-gray-500">
-            {formattedStartDate} • {formattedEndDate} • (11 meses)
+            {formattedStartDate} • {formattedEndDate} • ({formattedWorkTime})
           </span>
           <div className="text-gray-400">
             <RichText content={description.raw} />
