@@ -45,8 +45,8 @@ export const HeroSection = ({ homeInfo }: HeroSectionProps) => {
           </div>
 
           <div className="flex flex-wrap gap-x-2 gap-y-3 lg:max-w-[340px]">
-            {homeInfo.technologies.map((tech) => (
-              <TechBadge name={tech.name} />
+            {homeInfo.technologies.map((tech, i) => (
+              <TechBadge key={i} name={tech.name} />
             ))}
           </div>
 
@@ -57,8 +57,9 @@ export const HeroSection = ({ homeInfo }: HeroSectionProps) => {
             </Button>
 
             <div className="text-gray-600 text-2xl flex items-center h-20 gap-3">
-              {homeInfo.socials.map((social) => (
+              {homeInfo.socials.map((social, i) => (
                 <a
+                  key={i}
                   href={social.url}
                   target="_blank"
                   className="hover:text-gray-100 transition-colors"
