@@ -49,7 +49,7 @@ export default async function Project({ params: { slug } }: ProjectProps) {
   return (
     <>
       <ProjectDetails project={project} />
-      <ProjectSections />
+      <ProjectSections sections={project.sections} />
     </>
   );
 }

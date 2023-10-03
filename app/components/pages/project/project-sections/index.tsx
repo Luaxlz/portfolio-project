@@ -1,20 +1,14 @@
+import { ProjectSection } from "@/app/types/projects";
 import Image from "next/image";
 
-const sectionsMock = [
-  {
-    title: "Titulo",
-    image: "https://placehold.co/1376x720/png",
-  },
-  {
-    title: "Titulo 2",
-    image: "https://placehold.co/1376x720/png",
-  },
-];
+type ProjectSectionsProps = {
+  sections: ProjectSection[];
+};
 
-export const ProjectSections = () => {
+export const ProjectSections = ({ sections }: ProjectSectionsProps) => {
   return (
     <section className="container my-12 md:my-32 flex flex-col gap-8 md:gap-32">
-      {sectionsMock.map((section) => (
+      {sections.map((section) => (
         <div
           key={section.title}
           className="flex flex-col items-center gap-6 md:gap-12"
@@ -23,7 +17,7 @@ export const ProjectSections = () => {
             {section.title}
           </h2>
           <Image
-            src={section.image}
+            src={section.image.url}
             width={1080}
             height={672}
             className="w-full aspect-auto rounded-lg object-cover"
