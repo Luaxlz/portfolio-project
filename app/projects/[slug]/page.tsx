@@ -3,7 +3,7 @@ import { ProjectDetails } from "../../components/pages/project/project-details";
 import { fetchHygraphQuery } from "@/app/utils/fetch-higraph-query";
 import { ProjectDetailsData } from "@/app/types/page-info";
 
-type ProjectDetailsProps = {
+type ProjectProps = {
   params: {
     slug: string;
   };
@@ -44,13 +44,11 @@ const getProjectDetails = async (slug: string): Promise<ProjectDetailsData> => {
     60 * 60 * 24 //24 hours
   );
 };
-export default async function Project({
-  params: { slug },
-}: ProjectDetailsProps) {
-  const response = await getProjectDetails(slug);
+export default async function Project({ params: { slug } }: ProjectProps) {
+  const { project } = await getProjectDetails(slug);
   return (
     <>
-      <ProjectDetails />
+      <ProjectDetails project={project} />
       <ProjectSections />
     </>
   );
