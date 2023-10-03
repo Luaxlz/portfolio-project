@@ -1,8 +1,9 @@
 import { PageIntroduction } from "../components/pages/projects/page-introduction";
 import { ProjectsList } from "../components/pages/projects/projects-list";
+import { ProjectsPageData } from "../types/page-info";
 import { fetchHygraphQuery } from "../utils/fetch-higraph-query";
 
-const getPageData = async () => {
+const getPageData = async (): Promise<ProjectsPageData> => {
   const query = `
     query ProjectsQuery {
       projects {
@@ -16,16 +17,20 @@ const getPageData = async () => {
           name
         }
       }
-    }
-    `;
-  return fetchHygraphQuery(query);
+    }`;
+
+  return fetchHygraphQuery(
+    query,
+    60 * 60 * 24 //24 hours
+  );
 };
 
-export default function Projects() {
+export default async function Projects() {
+  const { projects } = await getPageData();
   return (
     <>
       <PageIntroduction />
-      <ProjectsList />
+      <ProjectsList projects={projects} />
     </>
   );
 }
