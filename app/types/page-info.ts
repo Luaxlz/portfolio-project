@@ -19,6 +19,10 @@ export type HomePageInfo = {
   knownTechs: KnownTech[];
 };
 
+export type ProjectDetailsData = {
+  project: Project;
+};
+
 export type ProjectsPageData = {
   projects: Project[];
 };

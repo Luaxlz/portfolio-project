@@ -1,21 +1,41 @@
 import { ProjectSections } from "@/app/components/pages/project/project-sections";
 import { ProjectDetails } from "../../components/pages/project/project-details";
-import { ProjectsPageData } from "@/app/types/page-info";
 import { fetchHygraphQuery } from "@/app/utils/fetch-higraph-query";
+import { ProjectDetailsData } from "@/app/types/page-info";
 
-const getPageData = async (): Promise<ProjectsPageData> => {
+type ProjectDetailsProps = {
+  params: {
+    slug: string;
+  };
+};
+
+const getProjectDetails = async (slug: string): Promise<ProjectDetailsData> => {
   const query = `
-    query ProjectsQuery {
-      projects {
-        shortDescription
-        slug
-        title
+    query ProjectQuery() {
+      project(where: {slug: "${slug}"}) {
+        pageThumbnail {
+          url
+        }
         thumbnail {
           url
+        }
+        sections {
+          title
+          image {
+            url
+          }
+        }
+        title
+        shortDescription
+        description {
+          raw
+          text
         }
         technologies {
           name
         }
+        liveProjectUrl
+        githubUrl
       }
     }`;
 
@@ -24,8 +44,10 @@ const getPageData = async (): Promise<ProjectsPageData> => {
     60 * 60 * 24 //24 hours
   );
 };
-
-export default function Project() {
+export default async function Project({
+  params: { slug },
+}: ProjectDetailsProps) {
+  const response = await getProjectDetails(slug);
   return (
     <>
       <ProjectDetails />
