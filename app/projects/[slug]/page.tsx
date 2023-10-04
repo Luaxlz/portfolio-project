@@ -5,6 +5,7 @@ import {
   ProjectDetailsData,
   ProjectsPageStaticData,
 } from "@/app/types/page-info";
+import { Metadata } from "next";
 
 type ProjectProps = {
   params: {
@@ -66,7 +67,27 @@ export async function generateStaticParams() {
     }
   `;
 
-  const projects = await fetchHygraphQuery<ProjectsPageStaticData>(query);
+  const { projects } = await fetchHygraphQuery<ProjectsPageStaticData>(query);
 
   return projects;
+}
+
+export async function generateMetadata({
+  params: { slug },
+}: ProjectProps): Promise<Metadata> {
+  const { project } = await getProjectDetails(slug);
+
+  return {
+    title: project.title,
+    description: project.shortDescription,
+    openGraph: {
+      images: [
+        {
+          url: project.thumbnail.url,
+          width: 1280,
+          height: 630,
+        },
+      ],
+    },
+  };
 }
