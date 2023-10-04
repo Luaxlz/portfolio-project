@@ -5,6 +5,8 @@ import { SectionTitle } from "../section-title";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const contactFormSchema = z.object({
   name: z.string().min(3).max(100),
@@ -13,14 +15,26 @@ const contactFormSchema = z.object({
 });
 
 export const ContactForm = () => {
-  const { handleSubmit, register } = useForm<contactFormData>({
+  const {
+    handleSubmit,
+    register,
+    reset,
+    formState: { isSubmitting },
+  } = useForm<contactFormData>({
     resolver: zodResolver(contactFormSchema),
   });
 
   type contactFormData = z.infer<typeof contactFormSchema>;
 
-  const onSubmit = (data: contactFormData) => {
-    console.log(data);
+  const onSubmit = async (data: contactFormData) => {
+    try {
+      await axios.post("/api/contact", data); //Substituir por fetch?
+      toast.success("Mensagem enviada com sucesso");
+
+      reset();
+    } catch (error) {
+      toast.error("Ocorreu um erro ao enviar sua mensagem :C");
+    }
   };
 
   return (
@@ -56,7 +70,10 @@ export const ContactForm = () => {
             maxLength={500}
             {...register("message")}
           />
-          <Button className="h-max mx-auto mt-6 shadow-button">
+          <Button
+            className="h-max mx-auto mt-6 shadow-button"
+            disabled={isSubmitting}
+          >
             Enviar mensagem
             <HiArrowNarrowRight size={18} />
           </Button>
